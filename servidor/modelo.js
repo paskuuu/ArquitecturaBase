@@ -26,8 +26,16 @@ function Sistema() {
             console.log("El usuario " + nick + " no existe");
         }
     }
+
+    this.numeroUsuarios = function(){
+        let lista=Object.keys(this.usuarios)
+        return lista.length
+    }
 }
 
 function Usuario(nick) {
     this.nick = nick;
 }
+
+module.exports.Sistema=Sistema
+
