@@ -4,6 +4,7 @@
   "description": "Base de la asignatura Procesos de Software",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "testW": "node_modules\\.bin\\jasmine-node servidor",
     "test": "./node_modules/.bin/jasmine-node servidor"
   },
