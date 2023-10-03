@@ -1,5 +1,4 @@
 function ClienteRest() {
-
   this.agregarUsuario = function (nick) {
     var cli = this;
     $.getJSON("/agregarUsuario/" + nick, function (data) {
@@ -34,7 +33,7 @@ function ClienteRest() {
     var cli = this;
     $.getJSON("/obtenerUsuarios", function (data) {
       if (data.usuarios != -1) {
-        console.log("Usuarios: " + data.usuarios);
+        console.log(data);
       } else {
         console.log("No hay usuarios");
       }
@@ -44,7 +43,7 @@ function ClienteRest() {
   this.numeroUsuarios = function () {
     var cli = this;
     $.getJSON("/numeroUsuarios", function (data) {
-      console.log("Numero de usuarios: " + data.usuarios)
+      console.log("Numero de usuarios: " + data.usuarios);
     });
   };
 
@@ -63,7 +62,12 @@ function ClienteRest() {
     var cli = this;
     $.getJSON("/usuarioActivo/" + nick, function (data) {
       if (data.usuarios != -1) {
-        console.log("Usuario " + nick + " ha sido borrado. La lista de usuarios es " + data.usuarios);
+        console.log(
+          "Usuario " +
+            nick +
+            " ha sido borrado. La lista de usuarios es " +
+            data.usuarios
+        );
       } else {
         console.log("No se ha podido ese usuario");
       }
