@@ -37,6 +37,7 @@ function Sistema() {
     if (!this.usuarios[nick]) {
       this.usuarios[nick] = new Usuario(nick);
       res.nick = nick;
+      console.log("Nuevo usuario en el sistema: " + nick);
     } else {
       console.log("el nick " + nick + " está en uso");
     }
