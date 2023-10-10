@@ -40,6 +40,15 @@ function ClienteRest() {
       } else {
         console.log("No hay usuarios");
       }
+
+      msg = '';
+      for (usuario in obtenerUsuarios) {
+        msg = msg + '\n Nombre: ' + usuario
+      }
+
+      if (msg == null) msg = 'No hay usuarios'
+
+      cw.mostrarMsg(msg)
     });
   };
 

@@ -20,7 +20,20 @@ function ControlWeb() {
 
   this.mostrarMsg = function (msg) {
     $("#mMsg").remove();
-    let cadena = '<h2 id="mMsg">' + msg + '</msg>';
+    let cadena = '<h2 id="mMsg">' + msg + "</msg>";
     $("#msg").append(cadena);
+  };
+
+  // - obtenerUsuarios
+  // - numeroUsuarios
+  // - usuarioActivo(nick)
+  // - eliminarUsuario(nick)
+
+  this.mostrarObtenerUsuarios = function () {
+
+    $("#linkOU").on("click", function () {
+      $("#mAU").remove();
+      rest.obtenerUsuarios();
+    });
   };
 }
