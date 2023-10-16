@@ -2,16 +2,32 @@ function ClienteRest() {
   this.agregarUsuario = function (nick) {
     var cli = this;
     $.getJSON("/agregarUsuario/" + nick, function (data) {
+      let msg = "El nick " + nick + " está ocupado";
       if (data.nick != -1) {
         console.log("Usuario " + nick + " ha sido registrado");
-        msg = "Usuario " + nick + " ha sido registrado";
+        msg = "Bienvenido al sistema, " + nick;
+        localStorage.setItem("nick", nick);
       } else {
         console.log("El nick ya está ocupado");
-        msg = "El nick " + nick + " ya está ocupado";
       }
-      cw.mostrarMsg(msg);
+      cw.mostrarMensaje(msg);
     });
   };
+
+  // this.agregarUsuario = function (nick) {
+  //   var cli = this;
+  //   $.getJSON("/agregarUsuario/" + nick, function (data) {
+  //     let msg = "El nick " + nick + " está ocupado";
+  //     if (data.nick != -1) {
+  //       console.log("Usuario " + nick + " ha sido registrado");
+  //       msg = "Bienvenido al sistema, " + nick;
+  //       $.cookie("nick", nick);
+  //     } else {
+  //       console.log("El nick ya está ocupado");
+  //     }
+  //     cw.mostrarMensaje(msg);
+  //   });
+  // };
 
   this.agregarUsuario2 = function (nick) {
     $.ajax({
@@ -41,14 +57,14 @@ function ClienteRest() {
         console.log("No hay usuarios");
       }
 
-      msg = '';
+      msg = "";
       for (usuario in obtenerUsuarios) {
-        msg = msg + '\n Nombre: ' + usuario
+        msg = msg + "\n Nombre: " + usuario;
       }
 
-      if (msg == null) msg = 'No hay usuarios'
+      if (msg == null) msg = "No hay usuarios";
 
-      cw.mostrarMsg(msg)
+      cw.mostrarMsg(msg);
     });
   };
 

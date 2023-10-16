@@ -30,10 +30,39 @@ function ControlWeb() {
   // - eliminarUsuario(nick)
 
   this.mostrarObtenerUsuarios = function () {
-
     $("#linkOU").on("click", function () {
       $("#mAU").remove();
       rest.obtenerUsuarios();
     });
   };
+
+  this.comprobarSesion = function () {
+    let nick = localStorage.getItem("nick");
+
+    if (nick) {
+      cw.mostrarMsg("Bienvenido al sistema, " + nick);
+    } else {
+      cw.mostrarAgregarUsuario();
+    }
+  };
+
+  this.salir = function () {
+    localStorage.removeItem("nick");
+    location.reload();
+  };
+
+  // this.comprobarSesion = function () {
+  //   let nick = $.cookie("nick");
+
+  //   if (nick) {
+  //     cw.mostrarMsg("Bienvenido al sistema, " + nick);
+  //   } else {
+  //     cw.mostrarAgregarUsuario();
+  //   }
+  // };
+
+  // this.salir = function () {
+  //   $.removeItem("nick");
+  //   location.reload();
+  // };
 }
