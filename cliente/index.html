@@ -23,9 +23,11 @@
 
     <script src="./cliente/clienteRest.js"></script>
     <script src="./cliente/controlWeb.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   </head>
 
-  <body>
+  <body onload="ini();">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <!-- Brand/logo -->
       <a class="navbar-brand" href="#">Sistema</a>
@@ -49,11 +51,13 @@
       <div id="msg"></div>
       <div id="ou"></div>
     </div>
-    <script>
-      rest = new ClienteRest();
-      cw = new ControlWeb();
-      //cw.mostrarAgregarUsuario();
-      cw.comprobarSesion();
-    </script>
+    <body onload="ini();">
+      <script>
+        function ini(){
+          cw=new ControlWeb(); 
+          rest=new ClienteRest(); 
+          cw.comprobarSesion();
+        };
+      </script>
   </body>
 </html>

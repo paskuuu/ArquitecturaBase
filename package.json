@@ -4,15 +4,24 @@
   "description": "Base de la asignatura Procesos de Software",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js test=false",
+    "dev": "nodemon index.js test = false",
     "testW": "node_modules\\.bin\\jasmine-node servidor",
     "test": "./node_modules/.bin/jasmine-node servidor"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-session": "^2.0.0",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
-    "jasmine-node": "^3.0.0"
+    "jasmine-node": "^3.0.0",
+    "mongodb": "^4.4.0",
+    "passport": "^0.5.3",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
