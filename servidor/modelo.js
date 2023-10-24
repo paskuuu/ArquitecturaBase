@@ -1,7 +1,6 @@
 const datos = require("./cad.js");
 
 function Sistema(test) {
- 
   this.usuarios = {};
   this.test = test;
   this.cad = new datos.CAD();
@@ -17,14 +16,17 @@ function Sistema(test) {
     return res;
   };
 
-  this.obtenerOCrearUsuario = function (email) {
-    this.cad.buscarOCrearUsuario(email, function (res) {
+  this.usuarioGoogle = function (usr, callback) {
+    this.cad.buscarOCrearUsuario(usr, function (res) {
       console.log("El usuario " + res.email + " esta registrado");
+      callback(res);
     });
   };
+
   this.obtenerUsuarios = function () {
     return this.usuarios;
   };
+  
   this.usuarioActivo = function (nick) {
     if (this.usuarios[nick]) {
       return true;
@@ -57,4 +59,4 @@ function Sistema(test) {
 function Usuario(nick) {
   this.nick = nick;
 }
-module.exports.Sistema = Sistema;
+module.exports.Sistema = Sistema;

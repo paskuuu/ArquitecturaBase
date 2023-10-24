@@ -79,14 +79,11 @@ app.get(
 );
 
 app.get("/good", function (request, response) {
-  let nick = request.user.emails[0].value;
-  if (nick) {
-    //sistema.agregarUsuario(nick);
-    sistema.obtenerOCrearUsuario(nick);
-  }
-  //console.log(request.user.emails[0].value);
-  response.cookie("nick", nick);
-  response.redirect("/");
+  let email = request.user.emails[0].value;
+  sistema.usuarioGoogle({ email: email }, function (usr) {
+    response.cookie("nick", usr.email);
+    response.redirect("/");
+  });
 });
 
 app.get("/fallo", function (request, response) {
@@ -95,9 +92,9 @@ app.get("/fallo", function (request, response) {
 
 app.post("/enviarJwt", function (request, response) {
   let jwt = request.body.jwt;
-  let user = JSON.parse(atob(jwt.split(".")[1]));
+  let user = JSON.parse(global.atob(jwt.split(".")[1]));
   let email = user.email;
-  sistema.obtenerOCrearUsuario(email, function (obj) {
-    response.send({ nick: obj.email });
+  sistema.usuarioGoogle({"email":email}, function (obj) {
+    response.send({ 'nick': obj.email });
   });
 });

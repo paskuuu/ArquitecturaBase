@@ -117,8 +117,8 @@ function ClienteRest() {
         } else {
           console.log("El nick ya está ocupado");
         }
-        //cw.limpiar();
-        cw.mostrarMensaje(msg);
+        cw.limpiar();
+        cw.mostrarMsg(msg);
       },
       error: function (xhr, textStatus, errorThrown) {
         //console.log(JSON.parse(xhr.responseText));
