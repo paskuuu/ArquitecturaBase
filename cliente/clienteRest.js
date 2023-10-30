@@ -1,5 +1,4 @@
 function ClienteRest() {
-
   // this.agregarUsuario = function (nick) {
   //   var cli = this;
   //   $.getJSON("/agregarUsuario/" + nick, function (data) {
@@ -127,6 +126,34 @@ function ClienteRest() {
       },
       contentType: "application/json",
       //dataType:'json'
+    });
+  };
+
+  this.registrarUsuario = function (email, password) {
+    $.ajax;
+  };
+
+  this.registrarUsuario = function (email, password) {
+    $.ajax({
+      type: "POST",
+      url: "/registrarUsuario",
+      data: JSON.stringify({ email: email, password: password }),
+      success: function (data) {
+        if (data.nick != -1) {
+          console.log("Usuario " + data.nick + " ha sido registrado");
+          $.cookie("nick", data.nick);
+          cw.limpiar();
+          cw.mostrarMensaje("Bienvenido al sistema, " + data.nick);
+          //cw.mostrarLogin();
+        } else {
+          console.log("El nick está ocupado");
+        }
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+      },
+      contentType: "application/json",
     });
   };
 }

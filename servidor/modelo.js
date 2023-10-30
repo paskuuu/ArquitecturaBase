@@ -26,7 +26,7 @@ function Sistema(test) {
   this.obtenerUsuarios = function () {
     return this.usuarios;
   };
-  
+
   this.usuarioActivo = function (nick) {
     if (this.usuarios[nick]) {
       return true;
@@ -55,6 +55,22 @@ function Sistema(test) {
       console.log("Conectado a Mongo Atlas");
     });
   }
+
+  this.registrarUsuario = function (obj, callback) {
+    let modelo = this;
+    if (!obj.nick) {
+      obj.nick = obj.email;
+    }
+    this.cad.buscarUsuario(obj, function (usr) {
+      if (!usr) {
+        modelo.cad.insertarUsuario(obj, function (res) {
+          callback(res);
+        });
+      } else {
+        callback({ email: -1 });
+      }
+    });
+  };
 }
 function Usuario(nick) {
   this.nick = nick;

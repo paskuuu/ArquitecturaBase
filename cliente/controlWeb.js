@@ -68,7 +68,8 @@ function ControlWeb() {
     if (nick) {
       cw.mostrarMsg("Bienvenido al sistema, " + nick);
     } else {
-      cw.mostrarAgregarUsuario();
+      //cw.mostrarAgregarUsuario();
+      cw.mostrarRegistro();
       cw.init();
     }
   };
@@ -98,8 +99,50 @@ function ControlWeb() {
     rest.enviarJwt(jwt);
   };
 
-  this.limpiar = function(){
+  this.limpiar = function () {
     $("#mAU").remove();
+  };
+
+  this.mostrarRegistro = function () {
+    $("#fmRegistro").remove();
+    $("#registro").load("registro.html", function () {
+      $("btnRegistro").on("click", function () {
+        let email = $("#email").val();
+        let pwd = $("#pwd").val();
+        if (email && pwd) {
+          console.log(email + " " + pwd);
+        }
+      });
+    });
+  };
+
+  this.buscarUsuario = function (obj, callback) {
+    buscar(this.usuarios, { email: obj.email }, callback);
+  };
+
+  this.insertarUsuario = function (usuario, callback) {
+    insertar(this.usuarios, usuario, callback);
+  };
+
+  function buscar(coleccion, criterio, callback) {
+    let col = coleccion;
+    coleccion.find(criterio).toArray(function (error, usuarios) {
+      if (usuarios.length == 0) {
+        callback(undefined);
+      } else {
+        callback(usuarios[0]);
+      }
+    });
   }
 
+  function insertar(coleccion, elemento, callback) {
+    coleccion.insertOne(elemento, function (err, result) {
+      if (err) {
+        console.log("error");
+      } else {
+        console.log("Nuevo elemento creado");
+        callback(elemento);
+      }
+    });
+  }
 }
