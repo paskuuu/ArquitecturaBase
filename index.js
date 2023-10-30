@@ -95,12 +95,12 @@ app.post("/enviarJwt", function (request, response) {
   let user = JSON.parse(global.atob(jwt.split(".")[1]));
   let email = user.email;
   sistema.usuarioGoogle({ email: email }, function (obj) {
-    response.send({ nick: obj.email });
+    response.send({ "nick": obj.email });
   });
 });
 
 app.post("/registrarUsuario", function (request, response) {
   sistema.registrarUsuario(request.body, function (res) {
-    response.send({ nick: res.email });
+    response.send({ "nick": res.email });
   });
 });

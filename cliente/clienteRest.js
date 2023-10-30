@@ -108,9 +108,10 @@ function ClienteRest() {
       url: "/enviarJwt",
       data: JSON.stringify({ jwt: jwt }),
       success: function (data) {
-        let msg = "El nick " + nick + " está ocupado";
+        let msg = "El nick " + data.nick + " está ocupado";
         if (data.nick != -1) {
           console.log("Usuario " + data.nick + " ha sido registrado");
+          //mostrar un mensaje
           msg = "Bienvenido al sistema, " + data.nick;
           $.cookie("nick", data.nick);
         } else {
@@ -130,10 +131,6 @@ function ClienteRest() {
   };
 
   this.registrarUsuario = function (email, password) {
-    $.ajax;
-  };
-
-  this.registrarUsuario = function (email, password) {
     $.ajax({
       type: "POST",
       url: "/registrarUsuario",
@@ -141,12 +138,14 @@ function ClienteRest() {
       success: function (data) {
         if (data.nick != -1) {
           console.log("Usuario " + data.nick + " ha sido registrado");
-          $.cookie("nick", data.nick);
+          // mostrar un mensaje diciendo: consulta tu email
+          //$.cookie("nick",data.nick);
           cw.limpiar();
-          cw.mostrarMensaje("Bienvenido al sistema, " + data.nick);
-          //cw.mostrarLogin();
+          //cw.mostrarMensaje("Bienvenido al sistema, "+data.nick);
+//                                                                        cw.mostrarLogin();
         } else {
           console.log("El nick está ocupado");
+          //cw.mostrarMensajeLogin("El nick está ocupado");
         }
       },
       error: function (xhr, textStatus, errorThrown) {

@@ -69,7 +69,7 @@ function ControlWeb() {
       cw.mostrarMsg("Bienvenido al sistema, " + nick);
     } else {
       //cw.mostrarAgregarUsuario();
-      cw.mostrarRegistro();
+      cw.mostrarLogin();
       cw.init();
     }
   };
@@ -104,12 +104,33 @@ function ControlWeb() {
   };
 
   this.mostrarRegistro = function () {
+    if ($.cookie("nick")) {
+      return true;
+    }
     $("#fmRegistro").remove();
-    $("#registro").load("registro.html", function () {
-      $("btnRegistro").on("click", function () {
+    $("#registro").load("./cliente/registro.html", function () {
+      $("#btnRegistro").on("click", function () {
         let email = $("#email").val();
         let pwd = $("#pwd").val();
         if (email && pwd) {
+          rest.registrarUsuario(email, pwd);
+          console.log(email + " " + pwd);
+        }
+      });
+    });
+  };
+
+  this.mostrarLogin = function () {
+    if ($.cookie("nick")) {
+      return true;
+    }
+    $("#fmLogin").remove();
+    $("#registro").load("./cliente/login.html", function () {
+      $("#btnLogin").on("click", function () {
+        let email = $("#email").val();
+        let pwd = $("#pwd").val();
+        if (email && pwd) {
+          rest.loginUsuario(email, pwd);
           console.log(email + " " + pwd);
         }
       });
