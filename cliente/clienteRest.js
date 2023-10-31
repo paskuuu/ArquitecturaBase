@@ -142,10 +142,34 @@ function ClienteRest() {
           //$.cookie("nick",data.nick);
           cw.limpiar();
           //cw.mostrarMensaje("Bienvenido al sistema, "+data.nick);
-//                                                                        cw.mostrarLogin();
+          //                                                                        cw.mostrarLogin();
         } else {
           console.log("El nick está ocupado");
           //cw.mostrarMensajeLogin("El nick está ocupado");
+        }
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+      },
+      contentType: "application/json",
+    });
+  };
+
+  this.loginUsuario = function (email, password) {
+    $.ajax({
+      type: "POST",
+      url: "/loginUsuario",
+      data: JSON.stringify({ email: email, password: password }),
+      success: function (data) {
+        if (data.nick != -1) {
+          console.log("Usuario " + data.nick + " ha sido registrado");
+          $.cookie("nick", data.nick);
+          cw.limpiar();
+          cw.mostrarMsg("Bienvenid@ al sistema, " + data.nick);
+        } else {
+          console.log("No se puede iniciar sesión");
+          cw.mostrarMsg("No se puede iniciar sesión");
         }
       },
       error: function (xhr, textStatus, errorThrown) {

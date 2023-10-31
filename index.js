@@ -104,3 +104,9 @@ app.post("/registrarUsuario", function (request, response) {
     response.send({ "nick": res.email });
   });
 });
+
+app.post("/loginUsuario", function (request, response){
+  sistema.loginUsuario(request.body, function(res) {
+    response.send({ "nick": res.email})
+  })
+})

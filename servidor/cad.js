@@ -4,8 +4,8 @@ var ObjectId = require("mongodb").ObjectId;
 function CAD() {
   this.usuarios;
 
-  this.buscarUsuario = function (obj, callback) {
-    buscar(this.usuarios, { email: obj.email }, callback);
+  this.buscarUsuario = function (criterio, callback) {
+    buscar(this.usuarios, criterio, callback);
   };
 
   this.insertarUsuario = function (usuario, callback) {
@@ -32,25 +32,29 @@ function CAD() {
         callback(elemento);
       }
     });
-
-    function buscarOCrear(coleccion, criterio, callback) {
-      coleccion.findOneAndUpdate(
-        criterio,
-        { $set: criterio },
-        { upsert: true, returnDocument: "after", projection: { email: 1 } },
-        function (err, doc) {
-          if (err) {
-            throw err;
-          } else {
-            console.log("Elemento actualizado");
-            console.log(doc.value.email);
-            //console.log(doc);
-            callback({ email: doc.value.email });
-          }
-        }
-      );
-    }
   }
+
+  function buscarOCrear(coleccion, criterio, callback) {
+    coleccion.findOneAndUpdate(
+      criterio,
+      { $set: criterio },
+      { upsert: true, returnDocument: "after", projection: { email: 1 } },
+      function (err, doc) {
+        if (err) {
+          throw err;
+        } else {
+          console.log("Elemento actualizado");
+          console.log(doc.value.email);
+          //console.log(doc);
+          callback({ email: doc.value.email });
+        }
+      }
+    );
+  }
+
+  this.buscarOCrearUsuario = function (usr, callback) {
+    buscarOCrear(this.usuarios, usr, callback);
+  };
 
   this.conectar = async function (callback) {
     let cad = this;

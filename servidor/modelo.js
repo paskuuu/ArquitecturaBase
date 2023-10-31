@@ -24,7 +24,18 @@ function Sistema(test) {
     });
   };
 
-  this.loginUsuario = function () {};
+  this.loginUsuario = function (obj, callback) {
+    this.cad.buscarUsuario(
+      { email: obj.email, confirmada: true },
+      function (usr) {
+        if (usr && obj.pwd == usr.password) {
+          callback(usr);
+        } else {
+          callback({ email: -1 });
+        }
+      }
+    );
+  };
 
   this.obtenerUsuarios = function () {
     return this.usuarios;
